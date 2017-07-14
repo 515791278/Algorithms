@@ -7,14 +7,14 @@
 有不足之处，还望指教！
 
 贝叶斯Bayes的实现，使用PANDAS处理数据，MATPLOTLIB来调优
-![image](https://github.com/515791278/Algorithms/blob/master/a%E7%B3%BB%E6%95%B0%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF.png)
+![image](https://github.com/515791278/Algorithms/blob/master/show_pic/a%E7%B3%BB%E6%95%B0%E5%92%8C%E8%B4%9D%E5%8F%B6%E6%96%AF.png)
 
 KNN算法的实现，及调优，使用欧氏距离
-![image](https://github.com/515791278/Algorithms/blob/master/KNN20.png)
+![image](https://github.com/515791278/Algorithms/blob/master/show_pic/KNN20.png)
 KNN算法的实现，及调优，使用余弦距离
-![image](https://github.com/515791278/Algorithms/blob/master/KNN300.png)
+![image](https://github.com/515791278/Algorithms/blob/master/show_pic/KNN300.png)
 
 协同过滤的实现，调优
-![image](https://github.com/515791278/Algorithms/blob/master/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4.png)
+![image](https://github.com/515791278/Algorithms/blob/master/show_pic/%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4.png)
 
 十分感谢您的观看！
