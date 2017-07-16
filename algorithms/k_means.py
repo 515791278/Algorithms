@@ -27,8 +27,8 @@ from process.processmain import processReturn
 
 def randCent(dataSet, k):
     n = shape(dataSet)[1]
-    centroids = mat(zeros((k, n)))  # create centroid mat
-    for j in range(n):  # create random cluster centers, within bounds of each dimension
+    centroids = mat(zeros((k, n)))  #创建矩阵
+    for j in range(n):  #循环遍历矩阵
         minJ = min(dataSet[:, j])
         rangeJ = float(max(dataSet[:, j]) - minJ)
         centroids[:, j] = mat(minJ + rangeJ * random.rand(k, 1))
@@ -54,8 +54,8 @@ def kMeans(dataSet, k, distMeas=distEclud, createCent=randCent):
             clusterAssment[i, :] = minIndex, minDist ** 2
         # printcentroids
         for cent in range(k):  # recalculate centroidsmean(a,axis=0).tolist()[0]
-            ptsInClust = dataSet[nonzero(clusterAssment[:, 0].A == cent)[0]]  # get all the point in this cluster
-            centroids[cent, :] = mean(ptsInClust, axis=0)  # assign centroid to mean移向平均
+            ptsInClust = dataSet[nonzero(clusterAssment[:, 0].A == cent)[0]]  # 得到每个重点点
+            centroids[cent, :] = mean(ptsInClust, axis=0)  # 移向平均
     return centroids, clusterAssment
 
 
@@ -71,10 +71,10 @@ def biKmeans(dataSet, k, distMeas=distEclud):
     while (len(centList) < k):
         lowestSSE = inf
         for i in range(len(centList)):
-            ptsInCurrCluster = dataSet[nonzero(clusterAssment[:,0].A == i)[0],:]  # get the data points currently in cluster i
+            ptsInCurrCluster = dataSet[nonzero(clusterAssment[:,0].A == i)[0],:]  得到每个族的第一个
             if len(ptsInCurrCluster)<3:continue
             centroidMat, splitClustAss = kMeans(ptsInCurrCluster, 2, distMeas)
-            sseSplit = sum(splitClustAss[:, 1])  # compare the SSE to the currrent minimum
+            sseSplit = sum(splitClustAss[:, 1])  # SSE与现有族群相比
             sseNotSplit = sum(clusterAssment[nonzero(clusterAssment[:,0].A != i)[0], 1])
             # print("选择分离的族", sseSplit,"未分离的族", sseNotSplit,i)
             if (sseSplit + sseNotSplit) < lowestSSE:
@@ -82,13 +82,13 @@ def biKmeans(dataSet, k, distMeas=distEclud):
                 bestNewCents = centroidMat
                 bestClustAss = splitClustAss.copy()
                 lowestSSE = sseSplit + sseNotSplit
-        bestClustAss[nonzero(bestClustAss[:, 0].A == 1)[0], 0] = len(centList)  # change 1 to 3,4, or whatever
+        bestClustAss[nonzero(bestClustAss[:, 0].A == 1)[0], 0] = len(centList)  # 改变 1 到3,4
         bestClustAss[nonzero(bestClustAss[:, 0].A == 0)[0], 0] = bestCentToSplit
         print ('要分离的族:  ', bestCentToSplit)
         print('分离族包含的元素： ', len(bestClustAss))
-        centList[bestCentToSplit] = bestNewCents[0, :].tolist()[0]  # replace a centroid with two best centroids
+        centList[bestCentToSplit] = bestNewCents[0, :].tolist()[0]  # 更换为新的最好的族群
         centList.append(bestNewCents[1, :].tolist()[0])
-        clusterAssment[nonzero(clusterAssment[:, 0].A == bestCentToSplit)[0],:] = bestClustAss  # reassign new clusters, and SSE
+        clusterAssment[nonzero(clusterAssment[:, 0].A == bestCentToSplit)[0],:] = bestClustAss  # 记录保存SSE
     print(colored(str(k)+"个族生成用时", "red"), time.clock() - t0)
     return centList, clusterAssment.tolist()#返回每个族的空间距离，每个数据所属于的族
 
